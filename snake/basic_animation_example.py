@@ -22,6 +22,8 @@ my_turtle.color("red")
 
 # Turn off automatic animation
 screen.tracer(0)
+
+
 move_turtle()
 
 turtle.done()

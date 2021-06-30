@@ -1,10 +1,8 @@
-"""
-The Classic Snake Game with Python Turtle Graphics
-Robin Andrews - https://compucademy.net/
-"""
+# Import the Turtle Graphics and Random modules
 import turtle
 import random
 
+# Define program constants
 WIDTH = 500
 HEIGHT = 500
 FOOD_SIZE = 10
@@ -110,15 +108,15 @@ def reset():
     game_loop()
 
 
-# Screen
+# Create a window where we will do our drawing
 screen = turtle.Screen()
-screen.setup(WIDTH, HEIGHT)
+screen.setup(WIDTH, HEIGHT)  # Set the dimensions of the window
 screen.title("Snake")
 screen.bgcolor("pink")
-screen.setup(WIDTH, HEIGHT)
-screen.tracer(0)
+screen.tracer(0)  # Turn off automatic animation
 
-# Stamper
+# Stamper Turtle
+# This Turtle is defined at the global level, so is available to move_snake()
 stamper = turtle.Turtle("square")
 stamper.color("cyan")
 stamper.penup()
@@ -136,4 +134,6 @@ bind_direction_keys()
 
 # Let's go
 reset()
+
+# Finish nicely
 turtle.done()

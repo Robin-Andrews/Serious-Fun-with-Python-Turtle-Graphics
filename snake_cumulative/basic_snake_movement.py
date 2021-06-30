@@ -1,7 +1,10 @@
+# Import the Turtle Graphics module
 import turtle
 
+# Define program constants
 WIDTH = 500
 HEIGHT = 500
+DELAY = 10  # Milliseconds between screen updates
 
 
 def move_snake():
@@ -17,12 +20,12 @@ def move_snake():
     turtle.ontimer(move_snake, 200)
 
 
-# Screen
+# Create a window where we will do our drawing
 screen = turtle.Screen()
-screen.setup(WIDTH, HEIGHT)
+screen.setup(WIDTH, HEIGHT)  # Set the dimensions of the window
 screen.title("Snake")
 screen.bgcolor("pink")
-screen.tracer(0)  # Disable automatic animation (mostly).
+screen.tracer(0)  # Turn off automatic animation
 
 # Stamper Turtle
 # This Turtle is defined at the global level, so is available to move_snake()
