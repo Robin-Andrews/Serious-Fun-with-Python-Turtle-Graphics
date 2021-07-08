@@ -4,7 +4,7 @@ import turtle
 # Define program constants
 WIDTH = 500
 HEIGHT = 500
-DELAY = 10  # Milliseconds between screen updates
+DELAY = 400  # Milliseconds between screen updates
 
 
 def move_snake():
@@ -17,7 +17,7 @@ def move_snake():
         stamper.goto(segment[0], segment[1])
         stamper.stamp()
     screen.update()
-    turtle.ontimer(move_snake, 200)
+    turtle.ontimer(move_snake, DELAY)
 
 
 # Create a window where we will do our drawing
