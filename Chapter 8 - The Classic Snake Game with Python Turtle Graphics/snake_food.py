@@ -58,20 +58,20 @@ def game_loop():
         # No collision so we can continue moving the snake.
         snake.append(new_head)
 
-    # Check food collision
-    if not food_collision():
-        snake.pop(0)  # Keep the snake the same length unless fed.
+        # Check food collision
+        if not food_collision():
+            snake.pop(0)  # Keep the snake the same length unless fed.
 
-    # Draw snake
-    for segment in snake:
-        stamper.goto(segment[0], segment[1])
-        stamper.stamp()
+        # Draw snake
+        for segment in snake:
+            stamper.goto(segment[0], segment[1])
+            stamper.stamp()
 
-    # Refresh screen
-    screen.update()
+        # Refresh screen
+        screen.update()
 
-    # Rinse and repeat
-    turtle.ontimer(game_loop, DELAY)
+        # Rinse and repeat
+        turtle.ontimer(game_loop, DELAY)
 
 
 def food_collision():

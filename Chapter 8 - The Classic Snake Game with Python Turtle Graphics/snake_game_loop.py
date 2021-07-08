@@ -42,6 +42,8 @@ def set_snake_direction(direction):
 def game_loop():
     global snake_direction, screen
 
+    stamper.clearstamps()  # Remove existing stamps made by stamper.
+
     #  Next position for head of snake.
     new_head = snake[-1].copy()
     new_head[0] = snake[-1][0] + offsets[snake_direction][0]
@@ -58,9 +60,6 @@ def game_loop():
         # Check food collision
         if not food_collision():
             snake.pop(0)  # Keep the snake the same length unless fed.
-
-        # Clear previous snake stamps
-        stamper.clearstamps()
 
         # Draw snake
         for segment in snake:

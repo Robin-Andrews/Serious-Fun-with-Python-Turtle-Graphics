@@ -4,7 +4,7 @@ import turtle
 # Define program constants
 WIDTH = 500
 HEIGHT = 500
-DELAY = 100  # Milliseconds between screen updates
+DELAY = 200  # Milliseconds between screen updates
 
 offsets = {
     "up": (0, 20),

@@ -1,10 +1,12 @@
-# Import the Turtle Graphics module
+# Import the Turtle Graphics and random modules
 import turtle
+import random
 
 # Define program constants
 WIDTH = 500
 HEIGHT = 500
-DELAY = 200  # Milliseconds between screen updates
+FOOD_SIZE = 10
+DELAY = 100  # Milliseconds between screen updates
 
 offsets = {
     "up": (0, 20),
@@ -51,13 +53,14 @@ def game_loop():
     # Check collisions
     if new_head in snake or new_head[0] < - WIDTH / 2 or new_head[0] > WIDTH / 2 \
             or new_head[1] < - HEIGHT / 2 or new_head[1] > HEIGHT / 2:
-        turtle.bye()
+        reset()
     else:
         # No collision so we can continue moving the snake.
         snake.append(new_head)
 
-        # Remove last segment of snake
-        snake.pop(0)
+        # Check food collision
+        if not food_collision():
+            snake.pop(0)  # Keep the snake the same length unless fed.
 
         # Draw snake
         for segment in snake:
@@ -65,10 +68,44 @@ def game_loop():
             stamper.stamp()
 
         # Refresh screen
+        screen.title(f"Snake Game. Score: {score}")
         screen.update()
 
         # Rinse and repeat
         turtle.ontimer(game_loop, DELAY)
+
+
+def food_collision():
+    global food_pos, score
+    if get_distance(snake[-1], food_pos) < 20:
+        score += 1
+        food_pos = get_random_food_pos()
+        food.goto(food_pos)
+        return True
+    return False
+
+
+def get_random_food_pos():
+    x = random.randint(- WIDTH / 2 + FOOD_SIZE, WIDTH / 2 - FOOD_SIZE)
+    y = random.randint(- HEIGHT / 2 + FOOD_SIZE, HEIGHT / 2 - FOOD_SIZE)
+    return (x, y)
+
+
+def get_distance(pos1, pos2):
+    x1, y1 = pos1
+    x2, y2 = pos2
+    distance = ((y2 - y1) ** 2 + (x2 - x1) ** 2) ** 0.5  # Pythagoras
+    return distance
+
+
+def reset():
+    global score, snake, snake_direction, food_pos
+    score = 0
+    snake = [[0, 0], [0, 20], [0, 40], [0, 60], [0, 80]]
+    snake_direction = "up"
+    food_pos = get_random_food_pos()
+    food.goto(food_pos)  # tuple - if no second argument provided this is treated as an xs, y pair.
+    game_loop()
 
 
 # Create a window where we will do our drawing
@@ -90,17 +127,15 @@ screen.onkey(go_right, "Right")
 screen.onkey(go_down, "Down")
 screen.onkey(go_left, "Left")
 
-# Create snake as a list of coordinate pairs. This variable is available globally.
-snake = [[0, 0], [20, 0], [40, 0], [60, 0]]
-snake_direction = "up"
+# Food
+food = turtle.Turtle()
+food.shape("circle")
+food.color("red")
+food.shapesize(FOOD_SIZE / 20)  # Default size of turtle "square" shape is 20.
+food.penup()
 
-# Draw snake for the first time
-for segment in snake:
-    stamper.goto(segment[0], segment[1])
-    stamper.stamp()
-
-# Set animation in motion
-game_loop()
+# Let's go
+reset()
 
 # Finish nicely
 turtle.done()
