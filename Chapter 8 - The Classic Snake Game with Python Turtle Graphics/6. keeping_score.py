@@ -47,8 +47,8 @@ def game_loop():
 
     #  Next position for head of snake.
     new_head = snake[-1].copy()
-    new_head[0] = snake[-1][0] + offsets[snake_direction][0]
-    new_head[1] = snake[-1][1] + offsets[snake_direction][1]
+    new_head[0] += offsets[snake_direction][0]
+    new_head[1] += offsets[snake_direction][1]
 
     # Check collisions
     if new_head in snake or new_head[0] < - WIDTH / 2 or new_head[0] > WIDTH / 2 \

@@ -45,8 +45,8 @@ def move_snake():
 
     #  Next position for head of snake.
     new_head = snake[-1].copy()
-    new_head[0] = snake[-1][0] + offsets[snake_direction][0]
-    new_head[1] = snake[-1][1] + offsets[snake_direction][1]
+    new_head[0] += offsets[snake_direction][0]
+    new_head[1] += offsets[snake_direction][1]
 
     # Add new head to snake body
     snake.append(new_head)
