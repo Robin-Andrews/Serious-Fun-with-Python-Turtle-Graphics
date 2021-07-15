@@ -1,9 +1,13 @@
 # Import the Turtle Graphics module
 import turtle
 
+# Define program constants
+WIDTH = 500
+HEIGHT = 500
+
 # Create a window where we will do our drawing.
 screen = turtle.Screen()
-screen.setup(500, 500)  # Set the dimensions of the Turtle Graphics window.
+screen.setup(WIDTH, HEIGHT)  # Set the dimensions of the Turtle Graphics window.
 screen.title("Program Title")
 screen.bgcolor("cyan")
 
