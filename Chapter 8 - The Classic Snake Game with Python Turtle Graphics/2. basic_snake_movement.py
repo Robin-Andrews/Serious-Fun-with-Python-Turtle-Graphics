@@ -9,14 +9,26 @@ DELAY = 400  # Milliseconds between screen updates
 
 def move_snake():
     stamper.clearstamps()  # Remove existing stamps made by stamper.
+
+    #  Next position for head of snake.
     new_head = snake[-1].copy()
     new_head[0] += 20
+
+    # Add new head to snake body
     snake.append(new_head)
+
+    # Remove last segment of snake
     snake.pop(0)
+
+    # Draw snake
     for segment in snake:
         stamper.goto(segment[0], segment[1])
         stamper.stamp()
+
+    # Refresh screen
     screen.update()
+
+    # Rinse and repeat
     turtle.ontimer(move_snake, DELAY)
 
 
